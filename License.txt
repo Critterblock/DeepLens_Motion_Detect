@@ -1,4 +1,4 @@
-MIT License
+MIT License for DeepLens Motion Detect Python Script
 
 Copyright (c) 2019 Ben Hamm, Jacob Nelson, Thorsten Graf
 
