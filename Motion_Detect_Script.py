@@ -27,7 +27,7 @@ avg_input_weight = 0.3
 
 # /share/Images/ - 4000 limit
 # /media/aws_cam/3235-3034/camrecords/  - 7000 limit
-saveDir = '/media/aws_cam/7CFB-7F00/' #Location of where images are saved. Recommend clearing every 24 hours with S3 upload
+saveDir = '/media/aws_cam/7CFB-7F00/' #Location of where images are saved. Your location will vary, so configure this. Recommend clearing every 24 hours with S3 upload
 FileLimit = 6000 #If we save too many files, stop the script to keep the hard drive from filling completely.
 
 # initialize variables
