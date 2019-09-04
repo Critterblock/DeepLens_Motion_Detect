@@ -98,7 +98,8 @@ while True:
                 cv2.imwrite(saveDir + timestamp + "_thresh.jpeg", thresh) #Uncomment this if you want to save the tB&W threshold image.)
                 cv2.imwrite(saveDir + timestamp + "_average.jpeg", avg)
 
-        #If we've saved too many files and are filling up the hard drive, kill the
+        #If we've saved too many files and are filling up the hard drive, kill the script
         TotalSaves = len(os.listdir(saveDir))
         if TotalSaves > FileLimit:
             print 'file limit reached'
+            break
