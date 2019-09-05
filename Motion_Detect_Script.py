@@ -35,7 +35,7 @@ avg = None
 TotalSaves = 0 #how many total images have we saved onto the hard disk.
 
 def create_average(frame): #take a frame and create a running average frame
-    frame = frame[650:1520, 1200:1550] #Adjust this so that it crops to your cat's approach vector
+    frame = frame[650:1520, 1200:1550] #Adjust this so that it crops to what you want to capture
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) #Turn to greyscale
     background = cv2.GaussianBlur(frame, (blur, blur), 0)
     print("[INFO] starting background model...")
