@@ -14,7 +14,8 @@ import cv2
 
 #configs section
 DEBUG_LEVEL = 0 # 0-save only pics; 1-save debug frames; 2-save debug frames even without motion
-COLOR_THRESHOLD = 40 #pixel diff threshold to turn image into BW silouhette showing changes against background
+IMAGE_SHAPE = (650,1520,1200,1550)
+COLOR_THRESHOLD = 40 #pixel diff threshold to turn image into BW silouhette showing changes
 AREA_THRESHOLD = 300 #area threshold for the size of contour that triggers motion detection
 BLUR = 25 # Gaussian BLUR level. NOTE- THIS MUST BE AN ODD NUMBER
 AVG_INPUT_WEIGHT = 0.3
@@ -36,7 +37,8 @@ def create_average(frame):
         frame - input frame for creating the running average frame
     '''
     #Adjust frame shape to crop what you to capture (saves lots of disk space)
-    #frame = frame[650:1520, 1200:1550]
+    if len(IMAGE_SHAPE) == 4:
+        frame = frame[IMAGE_SHAPE[0]:IMAGE_SHAPE[1], IMAGE_SHAPE[2]:IMAGE_SHAPE[3]]
     #Turn to greyscale
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     background = cv2.GaussianBlur(frame, (BLUR, BLUR), 0)
@@ -63,7 +65,8 @@ def detect_motion():
     while True:
         ret, frame = awscam.getLastFrame()
         if ret:
-            frame = frame[650:1520, 1200:1550]
+            if len(IMAGE_SHAPE) == 4:
+                frame = frame[IMAGE_SHAPE[0]:IMAGE_SHAPE[1], IMAGE_SHAPE[2]:IMAGE_SHAPE[3]]
             # store the colored frame as cframe to be able to save it
             cframe = frame
             # Grayscale the image
