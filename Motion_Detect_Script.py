@@ -19,21 +19,24 @@ AREA_THRESHOLD = 300 #area threshold for the size of contour that triggers motio
 BLUR = 25 # Gaussian BLUR level. NOTE- THIS MUST BE AN ODD NUMBER
 AVG_INPUT_WEIGHT = 0.3
 
-# /share/Images/ - 4000 limit
-# /media/aws_cam/3235-3034/camrecords/  - 7000 limit
+#Get the name of the SDCard in your DeepLens (it comes in the box, so make sure you put it in!)
+MEDIA_PATH = '/media/aws_cam/'
+SDCARD_NAME = [item for item in os.listdir(MEDIA_PATH) if len(item) == 9 and "-" in item][0]
+SDCARD_PATH = MEDIA_PATH + SDCARD_NAME
 
 #Location of where images are saved. Your location will vary, so configure this. Recommend
 # clearing every 24 hours with S3 upload
-SAVE_DIR = '/media/aws_cam/7CFB-7F00/'
+SAVE_DIR = SDCARD_PATH #You can set this to on-device storage, but that's not a great idea.
+
 #If we save too many files, stop the script to keep the hard drive from filling completely.
-FILE_LIMIT = 6000
+FILE_LIMIT = 20000 #Vary this depending on the size of your images
 
 def create_average(frame):
     ''' Method for creating a running average frame
         frame - input frame for creating the running average frame
     '''
-    #Adjust this so that it crops to what you want to capture
-    frame = frame[650:1520, 1200:1550]
+    #Adjust frame shape to crop what you to capture (saves lots of disk space)
+    #frame = frame[650:1520, 1200:1550]
     #Turn to greyscale
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     background = cv2.GaussianBlur(frame, (BLUR, BLUR), 0)
